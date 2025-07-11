@@ -276,7 +276,7 @@ const HeroSection: React.FC = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
           >
             <TypewriterEffect
-              text="Creating beautiful, functional, and user-friendly applications with modern technologies. Specializing in web and mobile development with a passion for 3D and interactive experiences."
+              text="Creating beautiful, functional, and user-friendly applications with modern technologies. Specializing in web and mobile development. "
               delay={40}
               initialDelay={1000}
             />

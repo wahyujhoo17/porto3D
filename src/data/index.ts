@@ -1,4 +1,4 @@
-import {  Skill, SocialLink } from "../types";
+import { Skill, SocialLink } from "../types";
 
 export const skills: Skill[] = [
   {
@@ -261,6 +261,19 @@ export const skills: Skill[] = [
     level: 82,
     category: "Language",
     features: ["Django", "Data Science", "Automation", "Machine Learning"],
+  },
+  {
+    id: 21,
+    name: "Supabase",
+    icon: "🟩",
+    logoUrl: "/images/skills/supabase.svg",
+    color: "bg-green-600",
+    textColor: "text-green-600",
+    description:
+      "Building scalable backends, authentication, and real-time databases with an open source Firebase alternative.",
+    level: 83,
+    category: "Database",
+    features: ["Realtime DB", "Auth", "Storage", "Edge Functions"],
   },
 ];
 
