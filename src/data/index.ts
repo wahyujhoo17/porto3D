@@ -281,7 +281,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: 1,
     name: "GitHub",
-    url: "https://github.com",
+    url: "https://github.com/wahyujhoo17",
     icon: "Github",
   },
   {
@@ -293,13 +293,13 @@ export const socialLinks: SocialLink[] = [
   {
     id: 3,
     name: "Twitter",
-    url: "https://twitter.com",
+    url: "https://x.com/wahyujhoo17?s=21",
     icon: "Twitter",
   },
   {
     id: 4,
     name: "Instagram",
-    url: "https://instagram.com",
+    url: "https://instagram.com/wahyujhoo17",
     icon: "Instagram",
   },
 ];

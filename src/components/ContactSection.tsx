@@ -1,29 +1,33 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone } from 'lucide-react';
-import ContactForm from './ContactForm';
-import { socialLinks } from '../data';
-import * as LucideIcons from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone } from "lucide-react";
+import ContactForm from "./ContactForm";
+import { socialLinks } from "../data";
+import * as LucideIcons from "lucide-react";
 
 const ContactSection: React.FC = () => {
   const contactInfo = [
     {
       icon: <Mail size={24} className="text-indigo-600 dark:text-indigo-400" />,
-      title: 'Email',
-      content: 'wahyu@example.com',
-      link: 'mailto:wahyu@example.com',
+      title: "Email",
+      content: "wahyujhoo.17@gmail.com",
+      link: "mailto:wahyujhoo.17@gmail.com",
     },
     {
-      icon: <Phone size={24} className="text-indigo-600 dark:text-indigo-400" />,
-      title: 'Phone',
-      content: '+1 (234) 567-8901',
-      link: 'tel:+12345678901',
+      icon: (
+        <Phone size={24} className="text-indigo-600 dark:text-indigo-400" />
+      ),
+      title: "WhatsApp",
+      content: "+62 838-3121-1636",
+      link: "https://wa.me/6283831211636",
     },
     {
-      icon: <MapPin size={24} className="text-indigo-600 dark:text-indigo-400" />,
-      title: 'Location',
-      content: 'Jakarta, Indonesia',
-      link: '#',
+      icon: (
+        <MapPin size={24} className="text-indigo-600 dark:text-indigo-400" />
+      ),
+      title: "Location",
+      content: "Bojonegoro, Indonesia",
+      link: "#",
     },
   ];
 
@@ -38,11 +42,13 @@ const ContactSection: React.FC = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Get In <span className="text-indigo-600 dark:text-indigo-400">Touch</span>
+            Get In{" "}
+            <span className="text-indigo-600 dark:text-indigo-400">Touch</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Feel free to reach out if you have any questions, project inquiries, or just want to say hello. 
-            I'm always open to discussing new opportunities and interesting projects.
+            Feel free to reach out if you have any questions, project inquiries,
+            or just want to say hello. I'm always open to discussing new
+            opportunities and interesting projects.
           </p>
         </motion.div>
 
@@ -60,12 +66,16 @@ const ContactSection: React.FC = () => {
                   className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg flex flex-col items-center text-center hover:shadow-md transition-shadow"
                 >
                   <div className="mb-3">{item.icon}</div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{item.content}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {item.content}
+                  </p>
                 </motion.a>
               ))}
             </div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +87,8 @@ const ContactSection: React.FC = () => {
               </h3>
               <div className="flex justify-center md:justify-start space-x-4">
                 {socialLinks.map((link, index) => {
-                  const IconComponent = LucideIcons[link.icon as keyof typeof LucideIcons];
+                  const IconComponent =
+                    LucideIcons[link.icon as keyof typeof LucideIcons];
                   return (
                     <motion.a
                       key={index}
@@ -95,7 +106,7 @@ const ContactSection: React.FC = () => {
               </div>
             </motion.div>
           </div>
-          
+
           <ContactForm />
         </div>
       </div>

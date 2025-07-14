@@ -201,6 +201,20 @@ const AboutSection: React.FC = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    // Convert Google Drive view link to direct download link
+                    const directDownloadUrl =
+                      "https://drive.google.com/uc?export=download&id=17LNs_VB6-3ds55NnBFyAaHkrMbzgo9eg";
+
+                    // Create temporary link element for download
+                    const link = document.createElement("a");
+                    link.href = directDownloadUrl;
+                    link.download = "Wahyu_Bagus_Setiawan_CV.pdf"; // Suggested filename
+                    link.target = "_blank";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
                   className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all"
                 >
                   Download CV
