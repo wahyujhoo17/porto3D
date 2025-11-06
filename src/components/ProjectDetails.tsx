@@ -592,11 +592,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                           <div className="w-3.5 h-3.5 rounded-full bg-yellow-500"></div>
                           <div className="w-3.5 h-3.5 rounded-full bg-green-500"></div>
                         </div>
-                        <div className="flex-1 text-center">
-                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300 truncate">
-                            {project.demoUrl.replace(/(^\w+:|^)\/\//, "")}
-                          </span>
-                        </div>
+                        <div className="flex-1 text-center"></div>
                         <div className="w-16"></div>
                       </div>
 
@@ -624,7 +620,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                         rel="noopener noreferrer"
                         className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
                       >
-                        visit the full site
+                        visit the full site demo
                       </a>
                       .
                     </p>
