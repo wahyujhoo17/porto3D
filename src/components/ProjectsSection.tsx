@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import ProjectDetails from "./ProjectDetails";
-import { supabase } from "../utils/supabaseClient";
 import { Project } from "../types";
 
 // Helper function to throttle mouse events for better performance
@@ -50,27 +49,31 @@ const ProjectsSection: React.FC = () => {
     setShowAllProjects(false);
   }, [activeFilter]);
 
-  // Fetch projects from Supabase
+  // Fetch projects from backend API (which proxies to Supabase)
   useEffect(() => {
     async function getProject() {
       try {
-        console.log("🔄 Fetching projects from Supabase...");
-        console.log("Supabase URL:", import.meta.env.VITE_SUPABASE_URL);
+        console.log("🔄 Fetching projects from backend API...");
         
-        const { data, error } = await supabase.from("projects").select("*");
+        const response = await fetch("/api/projects");
         
-        if (error) {
-          console.error("❌ Supabase Error:", {
-            message: error.message,
-            code: error.code,
-            details: error.details,
-            hint: error.hint,
-            status: error.status,
+        if (!response.ok) {
+          const error = await response.json();
+          console.error("❌ API Error:", {
+            status: response.status,
+            message: error.error || response.statusText,
+            ...error
           });
-        } else if (data && data.length > 0) {
+          setProjects([]);
+          return;
+        }
+        
+        const data = await response.json();
+        
+        if (data && Array.isArray(data) && data.length > 0) {
           console.log("✅ Projects fetched successfully:", data.length, "projects");
           // Pastikan technologies dan features jadi array
-          const parsed = data.map((p) => ({
+          const parsed = data.map((p: any) => ({
             ...p,
             technologies: Array.isArray(p.technologies)
               ? p.technologies
@@ -85,11 +88,12 @@ const ProjectsSection: React.FC = () => {
           }));
           setProjects(parsed);
         } else {
-          console.warn("⚠️ No projects found in database");
+          console.warn("⚠️ No projects found");
           setProjects([]);
         }
       } catch (err) {
         console.error("❌ Unexpected error:", err);
+        setProjects([]);
       }
     }
     getProject();
