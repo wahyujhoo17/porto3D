@@ -13,7 +13,7 @@ const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY;
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error('❌ Missing Supabase credentials in environment variables');
+    console.error('Error: Missing Supabase credentials in environment variables');
     process.exit(1);
 }
 
@@ -24,8 +24,6 @@ app.use(express.json());
 // API endpoint to fetch projects (backend proxy)
 app.get('/api/projects', async (req, res) => {
     try {
-        console.log('📡 Fetching projects from Supabase...');
-
         // Use REST API directly
         const response = await fetch(`${SUPABASE_URL}/rest/v1/projects?select=*`, {
             headers: {
@@ -36,24 +34,18 @@ app.get('/api/projects', async (req, res) => {
         });
 
         if (!response.ok) {
-            console.error('❌ HTTP error:', response.status, response.statusText);
+            console.error(`Failed to fetch projects: HTTP ${response.status}`);
             return res.status(response.status).json({
                 error: `HTTP ${response.status}: ${response.statusText}`
             });
         }
 
         const data = await response.json();
-        console.log('✅ Projects fetched:', Array.isArray(data) ? data.length : 0, 'records');
         res.json(data);
     } catch (err) {
-        console.error('❌ Server error:', {
-            message: err.message,
-            code: err.code,
-            cause: err.cause?.message
-        });
+        console.error('Error fetching projects:', err.message);
         res.status(500).json({
-            error: err.message || 'Internal server error',
-            details: err.toString()
+            error: err.message || 'Internal server error'
         });
     }
 });

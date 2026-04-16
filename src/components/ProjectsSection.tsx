@@ -53,17 +53,10 @@ const ProjectsSection: React.FC = () => {
   useEffect(() => {
     async function getProject() {
       try {
-        console.log("🔄 Fetching projects from backend API...");
-        
         const response = await fetch("/api/projects");
         
         if (!response.ok) {
-          const error = await response.json();
-          console.error("❌ API Error:", {
-            status: response.status,
-            message: error.error || response.statusText,
-            ...error
-          });
+          console.error("Failed to fetch projects:", response.statusText);
           setProjects([]);
           return;
         }
@@ -71,7 +64,6 @@ const ProjectsSection: React.FC = () => {
         const data = await response.json();
         
         if (data && Array.isArray(data) && data.length > 0) {
-          console.log("✅ Projects fetched successfully:", data.length, "projects");
           // Pastikan technologies dan features jadi array
           const parsed = data.map((p: any) => ({
             ...p,
@@ -88,11 +80,10 @@ const ProjectsSection: React.FC = () => {
           }));
           setProjects(parsed);
         } else {
-          console.warn("⚠️ No projects found");
           setProjects([]);
         }
       } catch (err) {
-        console.error("❌ Unexpected error:", err);
+        console.error("Error fetching projects:", err);
         setProjects([]);
       }
     }
