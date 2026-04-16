@@ -53,28 +53,43 @@ const ProjectsSection: React.FC = () => {
   // Fetch projects from Supabase
   useEffect(() => {
     async function getProject() {
-      const { data, error } = await supabase.from("projects").select("*");
-      if (error) {
-        console.error("Error fetching projects:", error);
-      } else if (data && data.length > 0) {
-        // console.log("Fetched projects:", data);
-        // Pastikan technologies dan features jadi array
-        const parsed = data.map((p) => ({
-          ...p,
-          technologies: Array.isArray(p.technologies)
-            ? p.technologies
-            : typeof p.technologies === "string"
-            ? JSON.parse(p.technologies)
-            : [],
-          features: Array.isArray(p.features)
-            ? p.features
-            : typeof p.features === "string"
-            ? JSON.parse(p.features)
-            : [],
-        }));
-        setProjects(parsed);
-      } else {
-        setProjects([]);
+      try {
+        console.log("🔄 Fetching projects from Supabase...");
+        console.log("Supabase URL:", import.meta.env.VITE_SUPABASE_URL);
+        
+        const { data, error } = await supabase.from("projects").select("*");
+        
+        if (error) {
+          console.error("❌ Supabase Error:", {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint,
+            status: error.status,
+          });
+        } else if (data && data.length > 0) {
+          console.log("✅ Projects fetched successfully:", data.length, "projects");
+          // Pastikan technologies dan features jadi array
+          const parsed = data.map((p) => ({
+            ...p,
+            technologies: Array.isArray(p.technologies)
+              ? p.technologies
+              : typeof p.technologies === "string"
+              ? JSON.parse(p.technologies)
+              : [],
+            features: Array.isArray(p.features)
+              ? p.features
+              : typeof p.features === "string"
+              ? JSON.parse(p.features)
+              : [],
+          }));
+          setProjects(parsed);
+        } else {
+          console.warn("⚠️ No projects found in database");
+          setProjects([]);
+        }
+      } catch (err) {
+        console.error("❌ Unexpected error:", err);
       }
     }
     getProject();
