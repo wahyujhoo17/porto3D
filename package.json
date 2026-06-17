@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "start": "node --env-file=.env.local server.js",
-    "server": "node --env-file=.env.local server.js",
+    "start": "node server.js",
+    "server": "node server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -19,6 +19,7 @@
     "@supabase/supabase-js": "^2.49.4",
     "clsx": "^2.1.1",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.344.0",

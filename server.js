@@ -2,6 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import * as dotenv from 'dotenv';
+
+// Try to load .env.local first (for local development)
+dotenv.config({ path: '.env.local' });
+// Then try to load .env (for production server)
+// This will only set variables that haven't already been set by .env.local
+dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
